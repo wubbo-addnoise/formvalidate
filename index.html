@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <title>Form validation</title>
+
+    <style>
+    *, :before, :after {
+        box-sizing: border-box;
+    }
+    body {
+        font: 16px sans-serif;
+    }
+    .container {
+        width: 100%;
+        max-width: 960px;
+        padding: 0 20px;
+        margin: 0 auto;
+    }
+
+    .field {
+        margin: 1em 0;
+    }
+    .field > label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.25em;
+    }
+    .field input[type="text"], .field input[type="email"], .field select, .field textarea {
+        display: block;
+        width: 100%;
+    }
+    .field input[type="text"], .field input[type="email"], .field textarea {
+        -webkit-appearance: none;
+        border: 1px solid #ebebeb;
+        padding: 10px;
+        border-radius: 2px;
+    }
+    .field select {
+        -webkit-appearance: none;
+        border: 1px solid #ebebeb;
+        background-color: #f8f8f8;
+        padding: 10px;
+        border-radius: 2px;
+    }
+    .field input[type="text"].invalid, .field input[type="email"].invalid, .field select.invalid, .field textarea.invalid {
+        border-color: red;
+    }
+    .field input[type="text"].valid, .field input[type="email"].valid, .field select.valid, .field textarea.valid {
+        border-color: green;
+    }
+
+    .checkbox label {
+        position: relative;
+        display: block;
+        padding-left: 24px;
+    }
+    .checkbox input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+    .checkbox label:before {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ebebeb;
+        border-radius: 2px;
+        position: absolute;
+        top: 0; left: 0;
+    }
+    .checkbox label:after {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: white;
+        position: absolute;
+        top: 4px; left: 4px;
+        border-radius: 1px;
+        opacity: 0;
+    }
+    .checkbox :checked + label:before {
+        background-color: green;
+        border-color: green;
+    }
+    .checkbox :checked + label:after {
+        opacity: 1;
+    }
+    .radio.checkbox label:before, .radio.checkbox label:after {
+        border-radius: 50%;
+    }
+    .checkbox .invalid + label:before {
+        border-color: red;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <form>
+
+            <div class="field">
+                <label for="field1">No validators</label>
+                <input type="text" id="field1" />
+            </div>
+
+            <div class="field">
+                <label for="field2">Required *</label>
+                <input type="text" id="field2" required />
+            </div>
+
+            <div class="field">
+                <label for="field3">Numeric *</label>
+                <input type="text" id="field3" required pattern="^\d+$" />
+            </div>
+
+            <div class="field">
+                <label for="field4">Email</label>
+                <input type="email" id="field4" />
+            </div>
+
+            <div class="field">
+                <label for="field5">Checkbox</label>
+                <div class="checkbox">
+                    <input type="checkbox" id="field5" required />
+                    <label for="field5">My checkbox</label>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="field6">Radio</label>
+                <div class="radio checkbox">
+                    <input type="radio" id="field6_one" name="field6" required />
+                    <label for="field6_one">One</label>
+                </div>
+                <div class="radio checkbox">
+                    <input type="radio" id="field6_two" name="field6" required />
+                    <label for="field6_two">Two</label>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="field7">Select *</label>
+                <select id="field7" required>
+                    <option value="">-- Select an item --</option>
+                    <option value="one">One</option>
+                    <option value="two">Two</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit</button>
+
+        </form>
+
+    </div>
+
+<script src="formvalidate.js"></script>
+<script>
+    liveValidate(document.querySelector('form'));
+    document.querySelector('button[type="submit"]').addEventListener('click', function(e){
+        e.preventDefault();
+        if (!isValid(document.querySelector('form'))) {
+            // alert('There are errors in the form');
+        }
+    });
+</script>
+</body>
+</html>
