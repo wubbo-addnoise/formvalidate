@@ -1,0 +1,6 @@
+.formval-message {
+    display: none;
+}
+.formval-message.visible {
+    display: block;
+}

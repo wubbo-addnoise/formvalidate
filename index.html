@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <title>Form validation</title>
 
+    <link rel="stylesheet" type="text/css" href="formvalidate.css"/>
+
     <style>
     *, :before, :after {
         box-sizing: border-box;
@@ -95,6 +97,11 @@
     .checkbox .invalid + label:before {
         border-color: red;
     }
+
+    .formval-message {
+        font-size: 0.85em;
+        color: red;
+    }
     </style>
 </head>
 <body>
@@ -115,7 +122,7 @@
 
             <div class="field">
                 <label for="field3">Numeric *</label>
-                <input type="text" id="field3" required pattern="^\d+$" />
+                <input type="text" id="field3" required pattern="^\d+$" data-message="Vul a.u.b een getal in" />
             </div>
 
             <div class="field">
